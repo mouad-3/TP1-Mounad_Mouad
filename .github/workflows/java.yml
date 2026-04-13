@@ -1,17 +1,13 @@
-name: Java CI avec Maven
+name: Java CI (sans Maven)
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout du code
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Installer Java
@@ -20,5 +16,8 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build avec Maven
-        run: mvn clean install
+      - name: Compiler le code
+        run: javac src/Main.java
+
+      - name: Exécuter le programme
+        run: java -cp src Main
